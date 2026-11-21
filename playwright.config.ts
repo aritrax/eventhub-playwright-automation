@@ -4,7 +4,7 @@ dotenv.config()
 
 export default defineConfig({
 
-    testDir: './test',
+    testDir: './tests',
 
     // Test execution
     fullyParallel: true,
