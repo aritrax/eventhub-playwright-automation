@@ -7,6 +7,10 @@ export class BookingPage {
     readonly phoneNumber: Locator;
     readonly confirmBooking: Locator;
     readonly confirmationHeading: Locator;
+    readonly bookingRef: Locator;
+    readonly ticketCount: Locator;
+    readonly minusButton: Locator;
+    readonly plusButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -15,6 +19,10 @@ export class BookingPage {
         this.phoneNumber = page.getByLabel("Phone Number*");
         this.confirmBooking = page.getByRole("button", { name: "Confirm Booking" });
         this.confirmationHeading = page.getByRole("heading", { name: "Booking Confirmed!" });
+        this.bookingRef = page.getByText(/Booking Ref\s+[A-Z]+-[A-Z0-9]+/);
+        this.minusButton = page.getByRole("button", { name: "−" });
+        this.plusButton = page.getByRole("button", { name: "+" });
+        this.ticketCount = this.minusButton.locator("..").getByText(/^\d+$/);
     }
 
     async fillDetails(fullName: string, email: string, phoneNumber: string) {

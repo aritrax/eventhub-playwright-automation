@@ -6,7 +6,7 @@
       "localStorage": [
         {
           "name": "eventhub_token",
-          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI3NTEyLCJlbWFpbCI6InlvdXJAZ21haWwuY29tIiwiaWF0IjoxNzk1NTg1NTcxLCJleHAiOjE3OTYxOTAzNzF9.yxEyDEmMGGpawNVVezQZwaDdbtQPvCOHOstaipR9dJY"
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI3NTEyLCJlbWFpbCI6InlvdXJAZ21haWwuY29tIiwiaWF0IjoxNzk1NTg5ODYxLCJleHAiOjE3OTYxOTQ2NjF9.Q-aO29CXeHLgzhzuxZDnRqy3LDwQ2_RygC_1ykg9lsk"
         }
       ]
     }
