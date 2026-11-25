@@ -50,3 +50,42 @@ test("BK-01 Book a ticket end to end @smoke", async ({ page, homePage, adminPage
   });
 });
 
+test("BK-02 Book two tickets and verify total and remaining seats", async ({page, homePage, adminPage, eventPage,bookingPage,}) => {
+  const eventTitle = `BK-02 Test Event ${Date.now()}`;
+  let seatsBefore: number;
+
+  await test.step("Create an event for the booking", async () => 
+    {
+        await homePage.gotoAdminManageEvent();
+        await adminPage.createNewEventAdminForm(eventTitle);
+        await expect(page.getByText("Event created!")).toBeVisible();
+    });
+
+  await test.step("Select two tickets and verify the total", async () => 
+    {
+        await page.goto("/events");
+        const card = await eventPage.getEventCard(eventTitle);
+        seatsBefore = await eventPage.getSeatCount(eventTitle);
+        await card.getByRole("link", { name: "Book Now" }).click();
+        await expect(page).toHaveURL(/\/events\/\d+/);
+
+        await expect(bookingPage.ticketCount).toHaveText("1");
+        await bookingPage.plusButton.click();
+        await expect(bookingPage.ticketCount).toHaveText("2");
+        await expect(page.locator("main")).toContainText(/\$100\s*×\s*2 tickets\s*\$200\s*Total\s*\$200/);
+    });
+
+  await test.step("Complete booking for two tickets", async () => 
+    {
+        await bookingPage.fillDetails("Test Student", "test.student@example.com", "9876543210");
+        await bookingPage.confirm();
+        await expect(bookingPage.confirmationHeading).toBeVisible();
+        await expect(page.locator("main")).toContainText(/Tickets\s*2/);
+    });
+
+  await test.step("Verify two seats were deducted", async () => {
+    await page.goto("/events");
+    expect(await eventPage.getSeatCount(eventTitle)).toBe(seatsBefore - 2);
+  });
+});
+

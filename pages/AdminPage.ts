@@ -27,7 +27,7 @@ export class AdminPage
 
     }
 
-    async createNewEventAdminForm(eventTitle: string)
+    async createNewEventAdminForm(eventTitle: string, totalSeats = 50)
     {
         await this.eventTittle.fill(eventTitle)  ;
         await this.eventDescribtion.fill("Playwright test event") ;
@@ -35,7 +35,7 @@ export class AdminPage
         await this.eventVenue.fill("Test Venue") ;
         await this.eventDate.fill("2027-12-31T10:00") ;
         await this.eventPrice.fill("100") ;
-        await this.eventSeat.fill("50") ;
+        await this.eventSeat.fill(String(totalSeats)) ;
         await this.addEvent.click() ;
     }
 }
